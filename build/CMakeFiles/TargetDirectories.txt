@@ -1,0 +1,4 @@
+C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/dualsense_haptic_core.dir
+C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/dualsense_dashboard.dir
+C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/ZERO_CHECK.dir

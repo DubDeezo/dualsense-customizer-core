@@ -1,18 +1,13 @@
 // dualsense_manager.cpp
-// Build: link against hidapi (hidapi::hidapi, or hidapi-hidraw / hidapi-libusb on Linux) and
-// the platform thread library (-pthread).
-// Some distros install the header as <hidapi.h> instead of <hidapi/hidapi.h>.
 #include "dualsense_manager.hpp"
-
 #include <hidapi/hidapi.h>
-
 #include <algorithm>
 #include <system_error>
 
 namespace haptic {
 
 DualSenseManager::DualSenseManager(const DualSenseConfig& cfg)
-    : cfg_(cfg), haptics_(cfg.haptic), telemetry_(cfg.telemetryRingFrames) {}
+    : cfg_(cfg), haptics_(cfg.haptic_cfg), telemetry_(cfg.telemetryRingFrames) {}
 
 DualSenseManager::~DualSenseManager() { stop(); }
 
@@ -32,7 +27,7 @@ bool DualSenseManager::start() {
         running_ = false;
         return false;
     }
-    openDevice();  // immediate feedback via connected(); the reader retries if this fails
+    openDevice();  
 
     bool readerStarted = false;
     try {
@@ -40,10 +35,9 @@ bool DualSenseManager::start() {
         readerStarted = true;
         writerThread_ = std::thread(&DualSenseManager::writerLoop, this);
     } catch (const std::system_error&) {
-        // Roll back exactly what was started; nothing is left running or open.
         if (readerStarted) {
             requestReaderStop();
-            readerThread_.join();  // reader closes the device on exit
+            readerThread_.join();  
         } else {
             closeDevice();
         }
@@ -57,7 +51,6 @@ bool DualSenseManager::start() {
 
 void DualSenseManager::requestReaderStop() {
     {
-        // Store under mtx_ so a reader about to sleep in wait_for cannot miss the wakeup.
         std::lock_guard<std::mutex> lk(mtx_);
         readerStop_.store(true, std::memory_order_release);
     }
@@ -72,15 +65,11 @@ void DualSenseManager::stop() {
     }
     cv_.notify_all();
 
-    // 1. Writer first: its last act is to release the triggers, which needs the device
-    //    still open - and the reader is what keeps it open.
     if (writerThread_.joinable()) writerThread_.join();
 
-    // 2. Now the reader: it leaves its loop, closes the device and exits.
     requestReaderStop();
     if (readerThread_.joinable()) readerThread_.join();
 
-    // 3. No thread can touch hidapi any more.
     hid_exit();
     std::lock_guard<std::mutex> lk(mtx_);
     running_ = false;
@@ -97,7 +86,6 @@ bool DualSenseManager::openDevice() {
         }
         deviceError_.store(false, std::memory_order_release);
         {
-            // Publish "connected" and the new epoch together so the writer cannot miss it.
             std::lock_guard<std::mutex> lk(mtx_);
             connected_.store(true, std::memory_order_release);
             ++connectEpoch_;
@@ -112,7 +100,7 @@ bool DualSenseManager::openDevice() {
 void DualSenseManager::closeDevice() noexcept {
     connected_.store(false, std::memory_order_release);
     {
-        std::lock_guard<std::mutex> dl(devMtx_);  // waits out any in-flight hid_write
+        std::lock_guard<std::mutex> dl(devMtx_);  
         if (dev_) {
             hid_close(dev_);
             dev_ = nullptr;
@@ -132,7 +120,7 @@ void DualSenseManager::queue(const std::optional<TriggerProfile>& left,
         if (right) pending_.right = right;
         dirty_ = true;
     }
-    cv_.notify_one();  // only the writer ever waits on cv_
+    cv_.notify_one();  
 }
 
 bool DualSenseManager::setLeftTriggerProfile(const TriggerProfile& p) {
@@ -152,7 +140,7 @@ bool DualSenseManager::setRightTriggerProfile(const TriggerProfile& p) {
 bool DualSenseManager::setTriggerProfiles(const TriggerProfile& left, const TriggerProfile& right) {
     TriggerBlock scratch;
     if (!encodeTriggerProfile(left, scratch) || !encodeTriggerProfile(right, scratch)) return false;
-    queue(left, right);  // one lock, one wake: both triggers land in the same report
+    queue(left, right);  
     return true;
 }
 
@@ -182,17 +170,16 @@ DualSenseManager::Stats DualSenseManager::stats() const noexcept {
 }
 
 // ---------------------------------------------------------------------------
-// Reader thread: owns open/reconnect/close and the blocking read loop
+// Reader thread
 // ---------------------------------------------------------------------------
 void DualSenseManager::readerLoop() {
     using Clock = std::chrono::steady_clock;
-    const int timeoutMs = std::clamp(cfg_.readTimeoutMs, 1, 100);
+    constexpr int timeoutMs = 10;
 
-    std::array<uint8_t, 128> buf{};  // larger than the 64-byte report: never truncates
-    InputState state;                // reused every iteration; only the parser and stamp write it
+    std::array<uint8_t, 128> buf{};  
+    InputState state;                
 
     while (!readerStop_.load(std::memory_order_acquire)) {
-        // ---- Disconnected: retry periodically (interruptible by stop) ----
         if (!connected_.load(std::memory_order_acquire)) {
             if (openDevice()) continue;
             std::unique_lock<std::mutex> lk(mtx_);
@@ -201,48 +188,45 @@ void DualSenseManager::readerLoop() {
             continue;
         }
 
-        // ---- The writer saw a failed write: this handle is bad, reopen it ----
         if (deviceError_.load(std::memory_order_acquire)) {
             closeDevice();
             continue;
         }
 
-        // ---- Blocking read. dev_ is only modified by this thread, so no lock is needed ----
         const int n = hid_read_timeout(dev_, buf.data(), buf.size(), timeoutMs);
-        if (n < 0) {  // unplugged / error
+        if (n < 0) {  
             closeDevice();
             continue;
         }
-        if (n == 0) continue;  // timeout: loop back to re-check stop and the error flag
+        if (n == 0) continue;  
 
-        // Stamp immediately after the read returns, before any parsing work.
         const uint64_t nowNs = static_cast<uint64_t>(
             std::chrono::duration_cast<std::chrono::nanoseconds>(Clock::now().time_since_epoch()).count());
 
         if (parseInputReport(buf.data(), static_cast<size_t>(n), state)) {
             state.hostTimeNs = nowNs;
-            telemetry_.publish(state);  // wait-free; never blocks the polling thread
+            telemetry_.publish(state);  
             inputReports_.fetch_add(1, std::memory_order_relaxed);
         } else {
             inputParseFailures_.fetch_add(1, std::memory_order_relaxed);
         }
     }
 
-    closeDevice();  // the one place the handle is released at shutdown
+    closeDevice();  
 }
 
 // ---------------------------------------------------------------------------
 // Writer thread
 // ---------------------------------------------------------------------------
 bool DualSenseManager::writeReport(const OutputState& state) noexcept {
-    if (serializeOutputReport(state, report_) != SerializeStatus::Ok) return true;  // unreachable: setters validate
+    if (serializeOutputReport(state, report_) != SerializeStatus::Ok) return true;  
 
-    std::lock_guard<std::mutex> dl(devMtx_);  // keeps the reader from closing mid-write
-    if (!dev_) return false;                  // reader already dropped the handle
+    std::lock_guard<std::mutex> dl(devMtx_);  
+    if (!dev_) return false;                  
     const int n = hid_write(dev_, report_.data(), report_.size());
     if (n < 0) {
         writeFailures_.fetch_add(1, std::memory_order_relaxed);
-        deviceError_.store(true, std::memory_order_release);  // reader will close + reopen
+        deviceError_.store(true, std::memory_order_release);  
         return false;
     }
     reportsWritten_.fetch_add(1, std::memory_order_relaxed);
@@ -254,10 +238,10 @@ void DualSenseManager::writerLoop() {
     const double hz = std::clamp(cfg_.maxUpdateHz, 10.0, 250.0);
     const auto minInterval =
         std::chrono::duration_cast<Clock::duration>(std::chrono::duration<double>(1.0 / hz));
-    Clock::time_point lastWrite{};  // epoch => the first write is never delayed
+    Clock::time_point lastWrite{};  
 
-    uint32_t seenEpoch = 0;       // last connection we replayed state onto
-    bool needReconnect = false;   // a write failed; hold off until the reader reopens the device
+    uint32_t seenEpoch = 0;       
+    bool needReconnect = false;   
 
     std::unique_lock<std::mutex> lk(mtx_);
     for (;;) {
@@ -268,17 +252,15 @@ void DualSenseManager::writerLoop() {
         });
         if (stop_.load(std::memory_order_acquire)) break;
 
-        // ---- (Re)connected: replay what the controller last had under any newer change ----
         if (connectEpoch_ != seenEpoch) {
             seenEpoch = connectEpoch_;
             needReconnect = false;
             if (!pending_.left) pending_.left = applied_.left;
             if (!pending_.right) pending_.right = applied_.right;
-            dirty_ = pending_.left.has_value() || pending_.right.has_value();
+            dirty_ = pending_.left.has_value() || pending_.right.has_value(); // Fixed flag underscores
             if (!dirty_) continue;
         }
 
-        // ---- Throttle. Setters keep overwriting pending_ meanwhile, so bursts coalesce ----
         const auto due = lastWrite + minInterval;
         if (Clock::now() < due &&
             cv_.wait_until(lk, due, [this] { return stop_.load(std::memory_order_acquire); }))
@@ -287,7 +269,7 @@ void DualSenseManager::writerLoop() {
         const OutputState snap = pending_;
         pending_ = OutputState{};
         dirty_ = false;
-        lk.unlock();  // never hold mtx_ across a (potentially blocking) hid_write
+        lk.unlock();  
 
         const bool ok = writeReport(snap);
         lastWrite = Clock::now();
@@ -297,7 +279,7 @@ void DualSenseManager::writerLoop() {
         }
 
         lk.lock();
-        if (!ok) {  // keep the unsent change, but never overwrite a newer one
+        if (!ok) {  
             if (!pending_.left) pending_.left = snap.left;
             if (!pending_.right) pending_.right = snap.right;
             dirty_ = pending_.left.has_value() || pending_.right.has_value();
@@ -306,15 +288,13 @@ void DualSenseManager::writerLoop() {
     }
     lk.unlock();
 
-    // ---- Shutdown: leave the controller with neutral triggers. The reader still holds the
-    //      device open (stop() joins this thread first), so this write is safe. ----
     if (connected_.load(std::memory_order_acquire)) {
         OutputState off;
         off.left = OffProfile{};
         off.right = OffProfile{};
         writeReport(off);
     }
-    applied_ = OutputState{};  // a later start() begins from a clean slate
+    applied_ = OutputState{};  
 }
 
 }  // namespace haptic
