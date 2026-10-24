@@ -1,3 +1,4 @@
+// main.cpp : Native Windows Win32 Dashboard Window Canvas Container with RGB Status Tracking
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
@@ -18,16 +19,23 @@ DualSenseManager* g_manager = nullptr;
 InputState g_telemetry;
 DualSenseManager::Stats g_stats;
 
+// Authoritative RGB State Tracking Variables (Defaulting to a sharp PlayStation Ice-Blue)
+uint8_t g_ledR = 0;
+uint8_t g_ledG = 150;
+uint8_t g_ledB = 255;
+
 LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
     switch (uMsg) {
         case WM_PAINT: {
             PAINTSTRUCT ps;
             HDC hdc = BeginPaint(hwnd, &ps);
             
+            // Dark Mode Background
             HBRUSH bgBrush = CreateSolidBrush(RGB(24, 24, 24));
             FillRect(hdc, &ps.rcPaint, bgBrush);
             DeleteObject(bgBrush);
 
+            // Left & Right Panels
             HBRUSH panelBrush = CreateSolidBrush(RGB(45, 45, 45));
             RECT leftPanel = { 20, 70, 480, 570 };
             RECT rightPanel = { 520, 70, 980, 570 };
@@ -37,6 +45,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
 
             SetBkMode(hdc, TRANSPARENT);
             
+            // Header Text
             HFONT hFontTitle = CreateFontW(24, 0, 0, 0, FW_BOLD, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Segoe UI");
             HFONT hOldFont = (HFONT)SelectObject(hdc, hFontTitle);
             
@@ -47,8 +56,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             HFONT hFontNormal = CreateFontW(16, 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE, ANSI_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_SWISS, L"Segoe UI");
             SelectObject(hdc, hFontNormal);
 
+            // Left Panel: Adaptive Triggers & LED Adjustments
             SetTextColor(hdc, RGB(64, 192, 255));
-            std::wstring lTitle = L"Adaptive Trigger Profiles Configuration";
+            std::wstring lTitle = L"Hardware Customization Profiles";
             TextOutW(hdc, 40, 90, lTitle.c_str(), static_cast<int>(lTitle.length()));
 
             SetTextColor(hdc, RGB(240, 240, 240));
@@ -59,16 +69,28 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             TextOutW(hdc, 40, 170, i2.c_str(), static_cast<int>(i2.length()));
             TextOutW(hdc, 40, 200, i3.c_str(), static_cast<int>(i3.length()));
 
+            // INTERACTIVE LED UI METRIC PRINTING
+            SetTextColor(hdc, RGB(255, 150, 50));
+            std::wstring ledTitle = L"Light Bar RGB Diagnostics Channel State:";
+            TextOutW(hdc, 40, 260, ledTitle.c_str(), static_cast<int>(ledTitle.length()));
+            
+            SetTextColor(hdc, RGB(255, 255, 255));
+            std::wstring ledMetrics = L"Target Lightbar Matrix: R=" + std::to_wstring(g_ledR) + 
+                                      L" G=" + std::to_wstring(g_ledG) + L" B=" + std::to_wstring(g_ledB);
+            TextOutW(hdc, 40, 290, ledMetrics.c_str(), static_cast<int>(ledMetrics.length()));
+            
+            std::wstring ledHint = L"-> Press [1] for Red | [2] for Green | [3] for Ice-Blue";
+            TextOutW(hdc, 40, 320, ledHint.c_str(), static_cast<int>(ledHint.length()));
+
+            // Right Panel: Telemetry Readouts
             SetTextColor(hdc, RGB(102, 255, 102));
             std::wstring rTitle = L"Real-Time Telemetry Performance Analytics";
             TextOutW(hdc, 540, 90, rTitle.c_str(), static_cast<int>(rTitle.length()));
 
-            SetTextColor(hdc, RGB(255, 255, 255));
-            
-            std::wstring s1 = L"Outbound HID Written Packets: " + std::to_wstring(g_stats.reportsWritten);
+            std::wstring s1 = L"Outbound HID Transmissions: " + std::to_wstring(g_stats.reportsWritten);
             std::wstring s2 = L"Inbound HID Received Frames: " + std::to_wstring(g_stats.inputReports);
             std::wstring s3 = L"Battery Capacity Indicator: " + std::to_wstring(g_telemetry.batteryLevel * 10) + L"% Status";
-            std::wstring s4 = L"Simulated Left Stick Position: X=" + std::to_wstring(g_telemetry.leftStickX) + L" Y=" + std::to_wstring(g_telemetry.leftStickY);
+            std::wstring s4 = L"Physical Joystick Position: X=" + std::to_wstring(g_telemetry.leftStickX) + L" Y=" + std::to_wstring(g_telemetry.leftStickY);
 
             TextOutW(hdc, 540, 140, s1.c_str(), static_cast<int>(s1.length()));
             TextOutW(hdc, 540, 170, s2.c_str(), static_cast<int>(s2.length()));
@@ -80,6 +102,15 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) 
             DeleteObject(hFontNormal);
 
             EndPaint(hwnd, &ps);
+            return 0;
+        }
+        case WM_KEYDOWN: {
+            // Check for hotkeys to swap colors on the fly
+            if (g_manager) {
+                if (wParam == '1') { g_ledR = 255; g_ledG = 0;   g_ledB = 0;   g_manager->setLightbarColor(g_ledR, g_ledG, g_ledB); }
+                if (wParam == '2') { g_ledR = 0;   g_ledG = 255; g_ledB = 0;   g_manager->setLightbarColor(g_ledR, g_ledG, g_ledB); }
+                if (wParam == '3') { g_ledR = 0;   g_ledG = 150; g_ledB = 255; g_manager->setLightbarColor(g_ledR, g_ledG, g_ledB); }
+            }
             return 0;
         }
         case WM_CLOSE:
@@ -122,7 +153,7 @@ int main() {
     );
 
     if (!hwnd) {
-        std::cerr << "[FATAL] Window container initialization failed.\n";
+        std::cerr << "[FATAL] Window container initialization rejected by OS.\n";
         manager.stop();
         return 1;
     }
@@ -133,7 +164,8 @@ int main() {
     MSG msg = {};
     bool running = true;
 
-    manager.releaseTriggers();
+    // Send initial color to setup lightbar status
+    manager.setLightbarColor(g_ledR, g_ledG, g_ledB);
 
     while (running) {
         while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {

@@ -72,6 +72,10 @@ public:
     bool setRightTriggerProfile(const TriggerProfile& profile);
     bool setTriggerProfiles(const TriggerProfile& left, const TriggerProfile& right);
     void releaseTriggers();  
+    
+    // NEW HARDWARE COLOR LIGHTBAR EXPOSITION API
+    bool setLightbarColor(uint8_t r, uint8_t g, uint8_t b);
+  
 
     bool getLatestInput(InputState& out);
     size_t drainInput(InputState* dst, size_t maxCount);

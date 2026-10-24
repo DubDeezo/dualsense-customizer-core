@@ -40,4 +40,5 @@ target_include_directories(dualsense_dashboard PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_link_libraries(dualsense_dashboard PRIVATE dualsense_haptic_core Threads::Threads)
+# FIXED: Explicitly links 'hid' from the native Windows SDK to resolve the LNK2019 linker crash
+target_link_libraries(dualsense_dashboard PRIVATE dualsense_haptic_core hid Threads::Threads)
