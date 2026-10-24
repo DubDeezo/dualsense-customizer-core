@@ -13,7 +13,6 @@ endif()
 
 find_package(Threads REQUIRED)
 
-# Combine your mock local headers and core files natively
 set(IMGUI_SOURCES
     imgui/imgui.cpp
     imgui/imgui_draw.cpp
@@ -30,7 +29,6 @@ add_library(dualsense_haptic_core STATIC
     ${IMGUI_SOURCES}
 )
 
-# Route folder include lookups natively
 target_include_directories(dualsense_haptic_core PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/imgui
     ${CMAKE_CURRENT_SOURCE_DIR}/hidapi
@@ -42,5 +40,4 @@ target_include_directories(dualsense_dashboard PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Link your executable natively without external .lib hardware dependencies
 target_link_libraries(dualsense_dashboard PRIVATE dualsense_haptic_core Threads::Threads)

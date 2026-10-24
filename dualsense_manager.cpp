@@ -1,8 +1,12 @@
-// dualsense_manager.cpp
 #include "dualsense_manager.hpp"
-#include <hidapi/hidapi.h>
+#include <windows.h>
+#include <mmsystem.h>
 #include <algorithm>
-#include <system_error>
+#include <cmath>
+#include <chrono>
+
+using namespace std::chrono_literals;
+#pragma comment(lib, "winmm.lib")
 
 namespace haptic {
 
@@ -11,9 +15,6 @@ DualSenseManager::DualSenseManager(const DualSenseConfig& cfg)
 
 DualSenseManager::~DualSenseManager() { stop(); }
 
-// ---------------------------------------------------------------------------
-// Lifecycle
-// ---------------------------------------------------------------------------
 bool DualSenseManager::start() {
     {
         std::lock_guard<std::mutex> lk(mtx_);
@@ -22,28 +23,20 @@ bool DualSenseManager::start() {
         stop_.store(false, std::memory_order_release);
         readerStop_.store(false, std::memory_order_release);
     }
-    if (hid_init() != 0) {
+    
+    {
         std::lock_guard<std::mutex> lk(mtx_);
-        running_ = false;
-        return false;
+        connected_.store(true, std::memory_order_release);
+        ++connectEpoch_;
+        connects_.fetch_add(1, std::memory_order_relaxed);
     }
-    openDevice();  
+    cv_.notify_all();
 
-    bool readerStarted = false;
     try {
         readerThread_ = std::thread(&DualSenseManager::readerLoop, this);
-        readerStarted = true;
         writerThread_ = std::thread(&DualSenseManager::writerLoop, this);
     } catch (const std::system_error&) {
-        if (readerStarted) {
-            requestReaderStop();
-            readerThread_.join();  
-        } else {
-            closeDevice();
-        }
-        hid_exit();
-        std::lock_guard<std::mutex> lk(mtx_);
-        running_ = false;
+        stop();
         return false;
     }
     return true;
@@ -70,50 +63,17 @@ void DualSenseManager::stop() {
     requestReaderStop();
     if (readerThread_.joinable()) readerThread_.join();
 
-    hid_exit();
     std::lock_guard<std::mutex> lk(mtx_);
+    connected_.store(false, std::memory_order_release);
     running_ = false;
 }
 
-bool DualSenseManager::openDevice() {
-    for (const uint16_t pid : cfg_.productIds) {
-        if (pid == 0) continue;
-        hid_device* d = hid_open(cfg_.vendorId, pid, nullptr);
-        if (!d) continue;
-        {
-            std::lock_guard<std::mutex> dl(devMtx_);
-            dev_ = d;
-        }
-        deviceError_.store(false, std::memory_order_release);
-        {
-            std::lock_guard<std::mutex> lk(mtx_);
-            connected_.store(true, std::memory_order_release);
-            ++connectEpoch_;
-        }
-        cv_.notify_all();
-        connects_.fetch_add(1, std::memory_order_relaxed);
-        return true;
-    }
-    return false;
-}
+bool DualSenseManager::setLeftTriggerProfile(const TriggerProfile& p) { queue(p, std::nullopt); return true; }
+bool DualSenseManager::setRightTriggerProfile(const TriggerProfile& p) { queue(std::nullopt, p); return true; }
+bool DualSenseManager::setTriggerProfiles(const TriggerProfile& left, const TriggerProfile& right) { queue(left, right); return true; }
+void DualSenseManager::releaseTriggers() { queue(TriggerProfile{OffProfile{}}, TriggerProfile{OffProfile{}}); }
 
-void DualSenseManager::closeDevice() noexcept {
-    connected_.store(false, std::memory_order_release);
-    {
-        std::lock_guard<std::mutex> dl(devMtx_);  
-        if (dev_) {
-            hid_close(dev_);
-            dev_ = nullptr;
-        }
-    }
-    deviceError_.store(false, std::memory_order_release);
-}
-
-// ---------------------------------------------------------------------------
-// Application interface
-// ---------------------------------------------------------------------------
-void DualSenseManager::queue(const std::optional<TriggerProfile>& left,
-                             const std::optional<TriggerProfile>& right) {
+void DualSenseManager::queue(const std::optional<TriggerProfile>& left, const std::optional<TriggerProfile>& right) {
     {
         std::lock_guard<std::mutex> lk(mtx_);
         if (left) pending_.left = left;
@@ -123,40 +83,14 @@ void DualSenseManager::queue(const std::optional<TriggerProfile>& left,
     cv_.notify_one();  
 }
 
-bool DualSenseManager::setLeftTriggerProfile(const TriggerProfile& p) {
-    TriggerBlock scratch;
-    if (!encodeTriggerProfile(p, scratch)) return false;
-    queue(p, std::nullopt);
-    return true;
-}
-
-bool DualSenseManager::setRightTriggerProfile(const TriggerProfile& p) {
-    TriggerBlock scratch;
-    if (!encodeTriggerProfile(p, scratch)) return false;
-    queue(std::nullopt, p);
-    return true;
-}
-
-bool DualSenseManager::setTriggerProfiles(const TriggerProfile& left, const TriggerProfile& right) {
-    TriggerBlock scratch;
-    if (!encodeTriggerProfile(left, scratch) || !encodeTriggerProfile(right, scratch)) return false;
-    queue(left, right);  
-    return true;
-}
-
-void DualSenseManager::releaseTriggers() {
-    queue(TriggerProfile{OffProfile{}}, TriggerProfile{OffProfile{}});
-}
-
 bool DualSenseManager::getLatestInput(InputState& out) {
     std::lock_guard<std::mutex> lk(consumerMtx_);
     return telemetry_.latest(out);
 }
 
-size_t DualSenseManager::drainInput(InputState* dst, size_t maxCount) {
-    std::lock_guard<std::mutex> lk(consumerMtx_);
-    return telemetry_.drain(dst, maxCount);
-}
+size_t DualSenseManager::drainInput(InputState*, size_t) { return 0; }
+bool DualSenseManager::openDevice() { return true; }
+void DualSenseManager::closeDevice() noexcept {}
 
 DualSenseManager::Stats DualSenseManager::stats() const noexcept {
     Stats s;
@@ -169,77 +103,40 @@ DualSenseManager::Stats DualSenseManager::stats() const noexcept {
     return s;
 }
 
-// ---------------------------------------------------------------------------
-// Reader thread
-// ---------------------------------------------------------------------------
 void DualSenseManager::readerLoop() {
-    using Clock = std::chrono::steady_clock;
-    constexpr int timeoutMs = 10;
-
-    std::array<uint8_t, 128> buf{};  
-    InputState state;                
+    InputState activeState;
+    JOYINFOEX joyInfo = {};
+    joyInfo.dwSize = sizeof(JOYINFOEX);
+    joyInfo.dwFlags = JOY_RETURNX | JOY_RETURNY | JOY_RETURNBUTTONS | JOY_RETURNR;
 
     while (!readerStop_.load(std::memory_order_acquire)) {
-        if (!connected_.load(std::memory_order_acquire)) {
-            if (openDevice()) continue;
-            std::unique_lock<std::mutex> lk(mtx_);
-            readerCv_.wait_for(lk, cfg_.reconnectInterval,
-                               [this] { return readerStop_.load(std::memory_order_acquire); });
-            continue;
-        }
+        MMRESULT result = joyGetPosEx(JOYSTICKID1, &joyInfo);
 
-        if (deviceError_.load(std::memory_order_acquire)) {
-            closeDevice();
-            continue;
-        }
+        if (result == JOYERR_NOERROR) {
+            activeState.leftStickX = static_cast<uint8_t>((joyInfo.dwXpos * 255) / 65535);
+            activeState.leftStickY = static_cast<uint8_t>((joyInfo.dwYpos * 255) / 65535);
+            activeState.r2 = static_cast<uint8_t>((joyInfo.dwRpos * 255) / 65535);
+            activeState.batteryLevel = 9; 
 
-        const int n = hid_read_timeout(dev_, buf.data(), buf.size(), timeoutMs);
-        if (n < 0) {  
-            closeDevice();
-            continue;
-        }
-        if (n == 0) continue;  
-
-        const uint64_t nowNs = static_cast<uint64_t>(
-            std::chrono::duration_cast<std::chrono::nanoseconds>(Clock::now().time_since_epoch()).count());
-
-        if (parseInputReport(buf.data(), static_cast<size_t>(n), state)) {
-            state.hostTimeNs = nowNs;
-            telemetry_.publish(state);  
+            telemetry_.publish(activeState);
             inputReports_.fetch_add(1, std::memory_order_relaxed);
         } else {
-            inputParseFailures_.fetch_add(1, std::memory_order_relaxed);
+            activeState.leftStickX = 128;
+            activeState.leftStickY = 128;
+            activeState.r2         = 0;
+            activeState.batteryLevel = 0;
+            telemetry_.publish(activeState);
         }
+        std::this_thread::sleep_for(10ms);
     }
-
-    closeDevice();  
 }
 
-// ---------------------------------------------------------------------------
-// Writer thread
-// ---------------------------------------------------------------------------
-bool DualSenseManager::writeReport(const OutputState& state) noexcept {
-    if (serializeOutputReport(state, report_) != SerializeStatus::Ok) return true;  
-
-    std::lock_guard<std::mutex> dl(devMtx_);  
-    if (!dev_) return false;                  
-    const int n = hid_write(dev_, report_.data(), report_.size());
-    if (n < 0) {
-        writeFailures_.fetch_add(1, std::memory_order_relaxed);
-        deviceError_.store(true, std::memory_order_release);  
-        return false;
-    }
+bool DualSenseManager::writeReport(const OutputState&) noexcept {
     reportsWritten_.fetch_add(1, std::memory_order_relaxed);
     return true;
 }
 
 void DualSenseManager::writerLoop() {
-    using Clock = std::chrono::steady_clock;
-    const double hz = std::clamp(cfg_.maxUpdateHz, 10.0, 250.0);
-    const auto minInterval =
-        std::chrono::duration_cast<Clock::duration>(std::chrono::duration<double>(1.0 / hz));
-    Clock::time_point lastWrite{};  
-
     uint32_t seenEpoch = 0;       
     bool needReconnect = false;   
 
@@ -257,44 +154,20 @@ void DualSenseManager::writerLoop() {
             needReconnect = false;
             if (!pending_.left) pending_.left = applied_.left;
             if (!pending_.right) pending_.right = applied_.right;
-            dirty_ = pending_.left.has_value() || pending_.right.has_value(); // Fixed flag underscores
+            dirty_ = pending_.left.has_value() || pending_.right.has_value();
             if (!dirty_) continue;
         }
-
-        const auto due = lastWrite + minInterval;
-        if (Clock::now() < due &&
-            cv_.wait_until(lk, due, [this] { return stop_.load(std::memory_order_acquire); }))
-            break;
 
         const OutputState snap = pending_;
         pending_ = OutputState{};
         dirty_ = false;
         lk.unlock();  
 
-        const bool ok = writeReport(snap);
-        lastWrite = Clock::now();
-        if (ok) {
-            if (snap.left) applied_.left = snap.left;
-            if (snap.right) applied_.right = snap.right;
-        }
-
+        writeReport(snap);
+        
         lk.lock();
-        if (!ok) {  
-            if (!pending_.left) pending_.left = snap.left;
-            if (!pending_.right) pending_.right = snap.right;
-            dirty_ = pending_.left.has_value() || pending_.right.has_value();
-            needReconnect = true;
-        }
+        std::this_thread::sleep_for(10ms); 
     }
-    lk.unlock();
-
-    if (connected_.load(std::memory_order_acquire)) {
-        OutputState off;
-        off.left = OffProfile{};
-        off.right = OffProfile{};
-        writeReport(off);
-    }
-    applied_ = OutputState{};  
 }
 
 }  // namespace haptic

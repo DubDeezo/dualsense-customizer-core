@@ -1,4 +1,3 @@
-// dualsense_manager.hpp : coordinator for haptic_engine.hpp + adaptive_triggers.hpp
 #pragma once
 
 #include <array>
@@ -12,12 +11,10 @@
 #include "adaptive_triggers.hpp"
 #include "dualsense_telemetry.hpp"
 
-// Windows native C-bindings struct forward declaration
 struct hid_device;
 
 namespace haptic {
 
-// Explicitly defined right here so the compiler can never miss it
 struct HapticEngineConfig {
     double sampleRate = 48000.0;
     uint32_t outputChannels = 4;   

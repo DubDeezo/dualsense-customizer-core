@@ -70,7 +70,7 @@ events:
       The output was:
       0
       MSBuild version 18.10.1-1.26427.6+3cd27c13e for .NET Framework
-      Build started 10/24/2026 1:27:12 AM.
+      Build started 10/24/2026 2:07:31 AM.
       
       Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\4.4.4\\CompilerIdCXX\\CompilerIdCXX.vcxproj" on node 1 (default targets).
       PrepareForBuild:
@@ -99,7 +99,7 @@ events:
           0 Warning(s)
           0 Error(s)
       
-      Time Elapsed 00:00:00.85
+      Time Elapsed 00:00:00.95
       
       
       Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -736,8 +736,8 @@ events:
     checks:
       - "Detecting CXX compiler ABI info"
     directories:
-      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p"
-      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p"
+      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d"
+      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -748,39 +748,39 @@ events:
       variable: "CMAKE_CXX_ABI_COMPILED"
       cached: false
       stdout: |
-        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p'
+        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_fe2a7.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_11898.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.10.1-1.26427.6+3cd27c13e for .NET Framework
-        Build started 10/24/2026 1:27:13 AM.
+        Build started 10/24/2026 2:07:33 AM.
         
-        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\cmTC_fe2a7.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\cmTC_11898.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\Debug\\".
-          Creating directory "cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.tlog\\".
+          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\Debug\\".
+          Creating directory "cmTC_11898.dir\\Debug\\cmTC_11898.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.tlog\\unsuccessfulbuild".
+          Creating "cmTC_11898.dir\\Debug\\cmTC_11898.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_11898.dir\\Debug\\cmTC_11898.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_fe2a7.dir\\Debug\\\\" /Fd"cmTC_fe2a7.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_11898.dir\\Debug\\\\" /Fd"cmTC_11898.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36260 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_fe2a7.dir\\Debug\\\\" /Fd"cmTC_fe2a7.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /Fo"cmTC_11898.dir\\Debug\\\\" /Fd"cmTC_11898.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Program Files\\CMake\\share\\cmake-4.4\\Modules\\CMakeCXXCompilerABI.cpp"
           CMakeCXXCompilerABI.cpp
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\Debug\\cmTC_fe2a7.exe" /INCREMENTAL /ILK:"cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p/Debug/cmTC_fe2a7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p/Debug/cmTC_fe2a7.lib" /MACHINE:X64  /machine:x64 cmTC_fe2a7.dir\\Debug\\CMakeCXXCompilerABI.obj
-          cmTC_fe2a7.vcxproj -> C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\Debug\\cmTC_fe2a7.exe
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\Debug\\cmTC_11898.exe" /INCREMENTAL /ILK:"cmTC_11898.dir\\Debug\\cmTC_11898.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d/Debug/cmTC_11898.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d/Debug/cmTC_11898.lib" /MACHINE:X64  /machine:x64 cmTC_11898.dir\\Debug\\CMakeCXXCompilerABI.obj
+          cmTC_11898.vcxproj -> C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\Debug\\cmTC_11898.exe
         FinalizeBuildStatus:
-          Deleting file "cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.tlog\\unsuccessfulbuild".
-          Touching "cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.tlog\\cmTC_fe2a7.lastbuildstate".
-        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\cmTC_fe2a7.vcxproj" (default targets).
+          Deleting file "cmTC_11898.dir\\Debug\\cmTC_11898.tlog\\unsuccessfulbuild".
+          Touching "cmTC_11898.dir\\Debug\\cmTC_11898.tlog\\cmTC_11898.lastbuildstate".
+        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\cmTC_11898.vcxproj" (default targets).
         
         Build succeeded.
             0 Warning(s)
             0 Error(s)
         
-        Time Elapsed 00:00:00.67
+        Time Elapsed 00:00:00.89
         
       exitCode: 0
   -
@@ -793,7 +793,7 @@ events:
       Parsed CXX implicit link information:
         link line regex: [^( *|.*[/\\])(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
         linker tool regex: [^[ 	]*(->|"|[0-9]+>[ 	-]*Build:[ 	0-9]+ ms[ 	]*)?[ 	]*(([^"]*[/\\])?(ld[0-9]*(|\\.[a-rt-z][a-z]*|\\.s[a-np-z][a-z]*|\\.so[a-z]+)|link\\.exe|lld-link(\\.exe)?))("|,| |$)]
-        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-cgyy4p\\Debug\\cmTC_fe2a7.exe" /INCREMENTAL /ILK:"cmTC_fe2a7.dir\\Debug\\cmTC_fe2a7.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p/Debug/cmTC_fe2a7.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-cgyy4p/Debug/cmTC_fe2a7.lib" /MACHINE:X64  /machine:x64 cmTC_fe2a7.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
+        link line: [  C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-gogo1d\\Debug\\cmTC_11898.exe" /INCREMENTAL /ILK:"cmTC_11898.dir\\Debug\\cmTC_11898.ilk" /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d/Debug/cmTC_11898.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-gogo1d/Debug/cmTC_11898.lib" /MACHINE:X64  /machine:x64 cmTC_11898.dir\\Debug\\CMakeCXXCompilerABI.obj] ==> linker [C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe]
         linker tool for 'CXX': C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.51.36231/bin/HostX64/x64/link.exe 
         implicit libs: []
         implicit objs: []
@@ -823,8 +823,8 @@ events:
     checks:
       - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
     directories:
-      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-xvg7ey"
-      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-xvg7ey"
+      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-73q4kq"
+      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-73q4kq"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -834,39 +834,39 @@ events:
       variable: "CMAKE_HAVE_LIBC_PTHREAD"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-xvg7ey'
+        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-73q4kq'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_69de1.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_6d011.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.10.1-1.26427.6+3cd27c13e for .NET Framework
-        Build started 10/24/2026 1:27:15 AM.
+        Build started 10/24/2026 2:07:34 AM.
         
-        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\cmTC_69de1.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\cmTC_6d011.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\Debug\\".
-          Creating directory "cmTC_69de1.dir\\Debug\\cmTC_69de1.tlog\\".
+          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\Debug\\".
+          Creating directory "cmTC_6d011.dir\\Debug\\cmTC_6d011.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_69de1.dir\\Debug\\cmTC_69de1.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_69de1.dir\\Debug\\cmTC_69de1.tlog\\unsuccessfulbuild".
+          Creating "cmTC_6d011.dir\\Debug\\cmTC_6d011.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_6d011.dir\\Debug\\cmTC_6d011.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_69de1.dir\\Debug\\\\" /Fd"cmTC_69de1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\src.cxx"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_6d011.dir\\Debug\\\\" /Fd"cmTC_6d011.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\src.cxx"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36260 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_69de1.dir\\Debug\\\\" /Fd"cmTC_69de1.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\src.cxx"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CMAKE_HAVE_LIBC_PTHREAD /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_6d011.dir\\Debug\\\\" /Fd"cmTC_6d011.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\src.cxx"
           src.cxx
-        C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\cmTC_69de1.vcxproj]
-        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\cmTC_69de1.vcxproj" (default targets) -- FAILED.
+        C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\cmTC_6d011.vcxproj]
+        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\cmTC_6d011.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\cmTC_69de1.vcxproj" (default target) (1) ->
+        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\cmTC_6d011.vcxproj" (default target) (1) ->
         (ClCompile target) -> 
-          C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-xvg7ey\\cmTC_69de1.vcxproj]
+          C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\src.cxx(1,10): error C1083: Cannot open include file: 'pthread.h': No such file or directory [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-73q4kq\\cmTC_6d011.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.33
+        Time Elapsed 00:00:00.37
         
       exitCode: 1
   -
@@ -879,8 +879,8 @@ events:
     checks:
       - "Looking for pthread_create in pthreads"
     directories:
-      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-d47iue"
-      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-d47iue"
+      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-9dp13i"
+      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-9dp13i"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -890,41 +890,41 @@ events:
       variable: "CMAKE_HAVE_PTHREADS_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-d47iue'
+        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-9dp13i'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_6a2f3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_0baf3.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.10.1-1.26427.6+3cd27c13e for .NET Framework
-        Build started 10/24/2026 1:27:15 AM.
+        Build started 10/24/2026 2:07:35 AM.
         
-        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\cmTC_6a2f3.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\cmTC_0baf3.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\Debug\\".
-          Creating directory "cmTC_6a2f3.dir\\Debug\\cmTC_6a2f3.tlog\\".
+          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\Debug\\".
+          Creating directory "cmTC_0baf3.dir\\Debug\\cmTC_0baf3.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_6a2f3.dir\\Debug\\cmTC_6a2f3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_6a2f3.dir\\Debug\\cmTC_6a2f3.tlog\\unsuccessfulbuild".
+          Creating "cmTC_0baf3.dir\\Debug\\cmTC_0baf3.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_0baf3.dir\\Debug\\cmTC_0baf3.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_6a2f3.dir\\Debug\\\\" /Fd"cmTC_6a2f3.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\CheckFunctionExists.cxx"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_0baf3.dir\\Debug\\\\" /Fd"cmTC_0baf3.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\CheckFunctionExists.cxx"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36260 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_6a2f3.dir\\Debug\\\\" /Fd"cmTC_6a2f3.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\CheckFunctionExists.cxx"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_0baf3.dir\\Debug\\\\" /Fd"cmTC_0baf3.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\CheckFunctionExists.cxx"
           CheckFunctionExists.cxx
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\Debug\\cmTC_6a2f3.exe" /INCREMENTAL /ILK:"cmTC_6a2f3.dir\\Debug\\cmTC_6a2f3.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-d47iue/Debug/cmTC_6a2f3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-d47iue/Debug/cmTC_6a2f3.lib" /MACHINE:X64  /machine:x64 cmTC_6a2f3.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\cmTC_6a2f3.vcxproj]
-        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\cmTC_6a2f3.vcxproj" (default targets) -- FAILED.
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\Debug\\cmTC_0baf3.exe" /INCREMENTAL /ILK:"cmTC_0baf3.dir\\Debug\\cmTC_0baf3.ilk" /NOLOGO pthreads.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-9dp13i/Debug/cmTC_0baf3.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-9dp13i/Debug/cmTC_0baf3.lib" /MACHINE:X64  /machine:x64 cmTC_0baf3.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\cmTC_0baf3.vcxproj]
+        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\cmTC_0baf3.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\cmTC_6a2f3.vcxproj" (default target) (1) ->
+        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\cmTC_0baf3.vcxproj" (default target) (1) ->
         (Link target) -> 
-          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-d47iue\\cmTC_6a2f3.vcxproj]
+          LINK : fatal error LNK1104: cannot open file 'pthreads.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-9dp13i\\cmTC_0baf3.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.57
+        Time Elapsed 00:00:00.66
         
       exitCode: 1
   -
@@ -937,8 +937,8 @@ events:
     checks:
       - "Looking for pthread_create in pthread"
     directories:
-      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-2352oq"
-      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-2352oq"
+      source: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-ek43wb"
+      binary: "C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-ek43wb"
     cmakeVariables:
       CMAKE_CXX_FLAGS: "/DWIN32 /D_WINDOWS /GR /EHsc"
       CMAKE_CXX_FLAGS_DEBUG: "/Zi /Ob0 /Od /RTC1"
@@ -948,41 +948,41 @@ events:
       variable: "CMAKE_HAVE_PTHREAD_CREATE"
       cached: true
       stdout: |
-        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-2352oq'
+        Change Dir: 'C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-ek43wb'
         
-        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_3d40b.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
+        Run Build Command(s): "C:/Program Files/Microsoft Visual Studio/18/Community/MSBuild/Current/Bin/amd64/MSBuild.exe" cmTC_c9035.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=18.0 /v:n
         MSBuild version 18.10.1-1.26427.6+3cd27c13e for .NET Framework
-        Build started 10/24/2026 1:27:16 AM.
+        Build started 10/24/2026 2:07:36 AM.
         
-        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\cmTC_3d40b.vcxproj" on node 1 (default targets).
+        Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\cmTC_c9035.vcxproj" on node 1 (default targets).
         PrepareForBuild:
           Structured output is enabled. The formatting of compiler diagnostics will reflect the error hierarchy. See https://aka.ms/cpp/structured-output for more details.
-          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\Debug\\".
-          Creating directory "cmTC_3d40b.dir\\Debug\\cmTC_3d40b.tlog\\".
+          Creating directory "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\Debug\\".
+          Creating directory "cmTC_c9035.dir\\Debug\\cmTC_c9035.tlog\\".
         InitializeBuildStatus:
-          Creating "cmTC_3d40b.dir\\Debug\\cmTC_3d40b.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
-          Touching "cmTC_3d40b.dir\\Debug\\cmTC_3d40b.tlog\\unsuccessfulbuild".
+          Creating "cmTC_c9035.dir\\Debug\\cmTC_c9035.tlog\\unsuccessfulbuild" because "AlwaysCreate" was specified.
+          Touching "cmTC_c9035.dir\\Debug\\cmTC_c9035.tlog\\unsuccessfulbuild".
         ClCompile:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_3d40b.dir\\Debug\\\\" /Fd"cmTC_3d40b.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\CheckFunctionExists.cxx"
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\CL.exe /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_c9035.dir\\Debug\\\\" /Fd"cmTC_c9035.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\CheckFunctionExists.cxx"
           Microsoft (R) C/C++ Optimizing Compiler Version 19.51.36260 for x64
           Copyright (C) Microsoft Corporation.  All rights reserved.
-          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_3d40b.dir\\Debug\\\\" /Fd"cmTC_3d40b.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\CheckFunctionExists.cxx"
+          cl /c /Zi /W1 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D CHECK_FUNCTION_EXISTS=pthread_create /D _MBCS /D "CMAKE_INTDIR=\\"Debug\\"" /EHsc /RTC1 /MDd /GR /std:c++17 /Fo"cmTC_c9035.dir\\Debug\\\\" /Fd"cmTC_c9035.dir\\Debug\\vc145.pdb" /external:W1 /TP /errorReport:queue "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\CheckFunctionExists.cxx"
           CheckFunctionExists.cxx
         Link:
-          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\Debug\\cmTC_3d40b.exe" /INCREMENTAL /ILK:"cmTC_3d40b.dir\\Debug\\cmTC_3d40b.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-2352oq/Debug/cmTC_3d40b.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-2352oq/Debug/cmTC_3d40b.lib" /MACHINE:X64  /machine:x64 cmTC_3d40b.dir\\Debug\\CheckFunctionExists.obj
-        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\cmTC_3d40b.vcxproj]
-        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\cmTC_3d40b.vcxproj" (default targets) -- FAILED.
+          C:\\Program Files\\Microsoft Visual Studio\\18\\Community\\VC\\Tools\\MSVC\\14.51.36231\\bin\\HostX64\\x64\\link.exe /OUT:"C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\Debug\\cmTC_c9035.exe" /INCREMENTAL /ILK:"cmTC_c9035.dir\\Debug\\cmTC_c9035.ilk" /NOLOGO pthread.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-ek43wb/Debug/cmTC_c9035.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /IMPLIB:"C:/Users/andre/OneDrive/Desktop/dualsense-customizer-core/build/CMakeFiles/CMakeScratch/TryCompile-ek43wb/Debug/cmTC_c9035.lib" /MACHINE:X64  /machine:x64 cmTC_c9035.dir\\Debug\\CheckFunctionExists.obj
+        LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\cmTC_c9035.vcxproj]
+        Done Building Project "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\cmTC_c9035.vcxproj" (default targets) -- FAILED.
         
         Build FAILED.
         
-        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\cmTC_3d40b.vcxproj" (default target) (1) ->
+        "C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\cmTC_c9035.vcxproj" (default target) (1) ->
         (Link target) -> 
-          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-2352oq\\cmTC_3d40b.vcxproj]
+          LINK : fatal error LNK1104: cannot open file 'pthread.lib' [C:\\Users\\andre\\OneDrive\\Desktop\\dualsense-customizer-core\\build\\CMakeFiles\\CMakeScratch\\TryCompile-ek43wb\\cmTC_c9035.vcxproj]
         
             0 Warning(s)
             1 Error(s)
         
-        Time Elapsed 00:00:00.42
+        Time Elapsed 00:00:00.51
         
       exitCode: 1
 ...
